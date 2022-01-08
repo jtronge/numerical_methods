@@ -61,7 +61,8 @@ fn main() {
         // let x = x / (180.0 * std::math::PI;
         ((std::f64::consts::PI / 180.0) * x).sin()
     }
-    let h = 5.0_f64;
+    let x0 = 10.0;
+    let h = 5.0;
     let table = compute_differences(x0, h, max_vals, f1);
     println!("Finite difference table for f(x) = sin(x)");
     print_table(&table, x0, h, max_vals);

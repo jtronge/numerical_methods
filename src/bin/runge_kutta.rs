@@ -31,7 +31,7 @@ fn main() {
     let h = 0.1;
     println!("Runge-Kutta formula's for y' = x - y.");
     println!("-------------------------------------");
-    for i in 0..10 {
+    for _ in 0..10 {
         let x = x0 + h;
         let y_rk = runge_kutta_4(x0, y0, h, f);
         println!("# y({})", x);
