@@ -33,26 +33,25 @@ fn main() {
         1.2642077,
         1.4495755,
     ];
-    for i in 0..100 {
+    // Note: this only applies one correction per iteration
+    for i in 0..10 {
         let x = x0 + ((i + 4) as f64) * h;
         // Estimate the next value
         let y_p = y_predict(h, y[0+i], y_1[1+i], y_1[2+i], y_1[3+i]);
         // Estimate the value of derivative
-        let y_prime_est = real_y_prime(x0 + (i as f64) * h, y_p);
+        // let y_prime_est = real_y_prime(x0 + (i as f64) * h, y_p);
+        let y_prime_est = real_y_prime(x, y_p);
         // Correct the value
         let mut y_c = y_correct(h, y[2+i], y_1[2+i], y_1[3+i], y_prime_est);
-        let mut last_y_c = y_c;
-        while (last_y_c - y_c).abs() > 1e-10 {
-            last_y_c = y_c;
-            y_c = y_correct(h, y[2+i], y_1[2+i], y_1[3+i], last_y_c);
-        }
+        // Find D
+        let d = y_c - y_p;
         // Now get a better value for y'
         // let y_prime = real_y_prime(x0 + );
         let y_prime = real_y_prime(x, y_c);
         println!("-----------");
         println!("y_p({}) = {}", x, y_p);
         println!("y_c({}) = {}", x, y_c);
-        println!("D: {}", y_c - y_p);
+        println!("D: {}", d);
         // Add the values
         y.push(y_c);
         y_1.push(y_prime);
